@@ -187,7 +187,6 @@
 
                     // Re-init functions on every table re-draw -- more info: https://datatables.net/reference/event/draw
                     dt.on('draw', function () {
-                        toggleToolbars();
                         handleDeleteRows();
                         KTMenu.createInstances();
                     });
@@ -309,40 +308,6 @@
                         // Reset datatable --- official docs reference: https://datatables.net/reference/api/search()
                         dt.search('').draw();
                     });
-                }
-
-                // Toggle toolbars
-                var toggleToolbars = function () {
-                    // Define variables
-                    const container = document.querySelector('#datatables');
-                    const toolbarBase = document.querySelector('[data-kt-docs-table-toolbar="base"]');
-                    const toolbarSelected = document.querySelector('[data-kt-docs-table-toolbar="selected"]');
-                    const selectedCount = document.querySelector('[data-kt-docs-table-select="selected_count"]');
-
-                    // Select refreshed checkbox DOM elements
-                    const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
-
-                    // Detect checkboxes state & count
-                    let checkedState = false;
-                    let count = 0;
-
-                    // Count checked boxes
-                    allCheckboxes.forEach(c => {
-                        if (c.checked) {
-                            checkedState = true;
-                            count++;
-                        }
-                    });
-
-                    // Toggle toolbars
-                    if (checkedState) {
-                        selectedCount.innerHTML = count;
-                        toolbarBase.classList.add('d-none');
-                        toolbarSelected.classList.remove('d-none');
-                    } else {
-                        toolbarBase.classList.remove('d-none');
-                        toolbarSelected.classList.add('d-none');
-                    }
                 }
 
                 // Public methods
