@@ -11,6 +11,7 @@ class Sopir extends Model
     protected $table = 'sopir';
     protected $primaryKey = 'id_sopir';
     protected $keyType = 'string';
+    public $timestamps = false;
 
     protected $fillable = [
         'id_card',

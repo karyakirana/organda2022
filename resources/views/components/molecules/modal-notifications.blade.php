@@ -1,7 +1,7 @@
 <x-molecules.modal size="sm" id="modalDeleteNotification">
     <p>Apakah anda yakin menghapus data?</p>
     <x-slot name="footer">
-        <x-atoms.button.btn-danger onclick="Livewire.emit('confirmDestroy')">
+        <x-atoms.button.btn-danger onclick="Livewire.emit('destroy')">
             Hapus
         </x-atoms.button.btn-danger>
     </x-slot>

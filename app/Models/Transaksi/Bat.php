@@ -1,26 +1,34 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\Transaksi;
 
+use App\Models\Master\Customer;
+use App\Models\Master\Mobil;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mobil extends Model
+class Bat extends Model
 {
     use HasFactory;
-    protected $table = 'mobil';
-    protected $primaryKey = 'id_mobil';
+    protected $table = 'transaksi_bat';
+    protected $primaryKey = 'id_bat';
     protected $keyType = 'string';
     public $timestamps = false;
+
     protected $fillable = [
+        'id_bat',
         'id_cust',
-        'jenis_mobil',
-        'nopol_mobil',
-        'status',
+        'id_mobil',
+        'no_bat',
     ];
 
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'id_cust', 'id_cust');
+    }
+
+    public function mobil()
+    {
+        return $this->belongsTo(Mobil::class, 'id_mobil', 'id_mobil');
     }
 }

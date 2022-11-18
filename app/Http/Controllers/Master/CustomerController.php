@@ -10,13 +10,36 @@ use Yajra\DataTables\DataTables;
 
 class CustomerController extends Controller
 {
+    public function index()
+    {
+        return view('pages.customer-index');
+    }
+
     /**
      * @throws Exception
      */
     public function datatables(Request $request)
     {
         if ($request->ajax()){
-            $data = Customer::latest('id_cust')->get();
+            $data = Customer::whereNot('status', 'Blokir')->latest('id_cust')->get();
+            return DataTables::of($data)
+                ->make(true);
+        }
+        return null;
+    }
+
+    public function blokir()
+    {
+        return view('pages.customer-index-blokir');
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function datatablesBlokir(Request $request)
+    {
+        if ($request->ajax()){
+            $data = Customer::where('status', 'Blokir')->latest('id_cust')->get();
             return DataTables::of($data)
                 ->make(true);
         }

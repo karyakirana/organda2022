@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Models\Master;
+namespace App\Models\Transaksi;
 
+use App\Models\Master\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Mobil extends Model
+class STID extends Model
 {
     use HasFactory;
-    protected $table = 'mobil';
-    protected $primaryKey = 'id_mobil';
+    protected $table = 'stid';
+    protected $primaryKey = 'id_stid';
     protected $keyType = 'string';
     public $timestamps = false;
+
     protected $fillable = [
+        'id_stid',
         'id_cust',
-        'jenis_mobil',
-        'nopol_mobil',
+        'nopol',
+        'kode',
+        'masa_berlaku',
         'status',
     ];
 
