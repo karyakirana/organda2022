@@ -8,6 +8,12 @@
             </div>
             <!--end::Search-->
 
+            <!--begin::Add customer-->
+            <a href="{{route('customer')}}" class="btn btn-primary" title="add BAT">
+                Data UnBlokir
+            </a>
+            <!--end::Add customer-->
+
         </div>
         <!--end::Wrapper-->
         <x-atoms.table id="datatables" wire:ignore.self>

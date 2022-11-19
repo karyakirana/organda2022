@@ -14,10 +14,16 @@
             <!--end::Search-->
 
             <!--begin::Toolbar-->
-            <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+            <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end" data-kt-docs-table-toolbar="base">
                 <!--begin::Add customer-->
                 <a href="{{route('mypertamina.form')}}" class="btn btn-primary" title="add Mobil">
                     Add MyPertamina
+                </a>
+                <!--end::Add customer-->
+
+                <!--begin::Add customer-->
+                <a href="{{route('mypertamina.index.blokir')}}" class="btn btn-primary" title="add Teluk Lamong">
+                    Data Blokir
                 </a>
                 <!--end::Add customer-->
             </div>

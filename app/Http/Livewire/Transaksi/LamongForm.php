@@ -22,7 +22,7 @@ class LamongForm extends Component
         'setSopir'
     ];
 
-    public function mount($id_lamong)
+    public function mount($id_lamong = null)
     {
         if ($id_lamong){
             $this->update = true;

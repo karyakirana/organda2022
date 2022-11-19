@@ -14,6 +14,7 @@ class BatForm extends Component
     public $id_mobil, $nopol;
     public $no_bat;
     public $tanggal_bat;
+    public $status;
 
     public $update = false;
 
@@ -70,6 +71,7 @@ class BatForm extends Component
         $bat->id_mobil = $this->id_mobil;
         $bat->no_bat = $this->no_bat;
         $bat->tanggal_bat = $this->tanggal_bat;
+        $bat->status = '';
         $bat->save();
         // redirect
         session()->flash('message', 'Data '.$this->id_bat.' sudah di simpan.');

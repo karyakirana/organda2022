@@ -27,16 +27,17 @@ Route::get('master/mobil/form', \App\Http\Livewire\Master\MobilForm::class)->nam
 Route::get('master/mobil/form/{idMobil}', \App\Http\Livewire\Master\MobilForm::class);
 
 Route::get('master/sopir', [\App\Http\Controllers\Master\SopirController::class, 'index'])->name('sopir');
-Route::get('master/sopir/blokir', [\App\Http\Controllers\Master\SopirController::class, 'indexBlokir']);
+Route::get('master/sopir/blokir', [\App\Http\Controllers\Master\SopirController::class, 'indexBlokir'])->name('sopir.index-blokir');
 Route::get('master/sopir/form', \App\Http\Livewire\Master\SopirForm::class)->name('sopir.form');
 Route::get('master/sopir/form/{id_sopir}', \App\Http\Livewire\Master\SopirForm::class);
 
 Route::get('transaksi/bat', [\App\Http\Controllers\Transaksi\BatController::class, 'index'])->name('bat');
+Route::get('transaksi/bat/blokir', [\App\Http\Controllers\Transaksi\BatController::class, 'indexBlokir'])->name('bat.index.blokir');
 Route::get('transaksi/bat/form', \App\Http\Livewire\Transaksi\BatForm::class)->name('bat.form');
 Route::get('transaksi/bat/form/{id_bat}', \App\Http\Livewire\Transaksi\BatForm::class);
 
 Route::get('transaksi/lamong', [\App\Http\Controllers\Transaksi\LamongController::class, 'index'])->name('lamong');
-Route::get('transaksi/lamong/blokir', [\App\Http\Controllers\Transaksi\LamongController::class, 'indexBlokir']);
+Route::get('transaksi/lamong/blokir', [\App\Http\Controllers\Transaksi\LamongController::class, 'indexBlokir'])->name('lamong.index-blokir');
 Route::get('transaksi/lamong/form', \App\Http\Livewire\Transaksi\LamongForm::class)->name('lamong.form');
 Route::get('transaksi/lamong/form/{id_lamong}', \App\Http\Livewire\Transaksi\LamongForm::class);
 

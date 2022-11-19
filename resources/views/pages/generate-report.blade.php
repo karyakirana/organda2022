@@ -4,6 +4,16 @@
             <x-atoms.button.btn-link-primary href="{{route('report.print')}}" target="_blank">PRINT</x-atoms.button.btn-link-primary>
         </x-slot:toolbar>
         <x-atoms.table id="dataCustomer">
+            <x-slot:head>
+                <tr>
+                    <x-atoms.table.td>NO</x-atoms.table.td>
+                    <x-atoms.table.td>Customer</x-atoms.table.td>
+                    <x-atoms.table.td>BAT</x-atoms.table.td>
+                    <x-atoms.table.td>Lamong</x-atoms.table.td>
+                    <x-atoms.table.td>STID</x-atoms.table.td>
+                    <x-atoms.table.td>MyPertamina</x-atoms.table.td>
+                </tr>
+            </x-slot:head>
             @foreach($customer as $row)
                 <tr>
                     <x-atoms.table.td>{{$loop->iteration}}</x-atoms.table.td>

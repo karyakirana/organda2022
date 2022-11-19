@@ -14,10 +14,16 @@
             <!--end::Search-->
 
             <!--begin::Toolbar-->
-            <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+            <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end" data-kt-docs-table-toolbar="base">
                 <!--begin::Add customer-->
                 <a href="{{route('stid.form')}}" class="btn btn-primary" title="add Mobil">
                     Add STID
+                </a>
+                <!--end::Add customer-->
+
+                <!--begin::Add customer-->
+                <a href="{{route('stid.index')}}" class="btn btn-primary" title="add Teluk Lamong">
+                    Data UnBlokir
                 </a>
                 <!--end::Add customer-->
             </div>

@@ -9,10 +9,16 @@
             <!--end::Search-->
 
             <!--begin::Toolbar-->
-            <div class="d-flex justify-content-end" data-kt-docs-table-toolbar="base">
+            <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end" data-kt-docs-table-toolbar="base">
                 <!--begin::Add customer-->
                 <a href="{{route('bat.form')}}" class="btn btn-primary" title="add BAT">
                     Add BAT
+                </a>
+                <!--end::Add customer-->
+
+                <!--begin::Add customer-->
+                <a href="{{route('bat.index.blokir')}}" class="btn btn-primary" title="add BAT">
+                    Data Blokir
                 </a>
                 <!--end::Add customer-->
             </div>
@@ -27,6 +33,7 @@
                 <x-atoms.table.td>Nopol</x-atoms.table.td>
                 <x-atoms.table.td>Nomor BAT</x-atoms.table.td>
                 <x-atoms.table.td>Tanggal</x-atoms.table.td>
+                <x-atoms.table.td>Status</x-atoms.table.td>
                 <x-atoms.table.td></x-atoms.table.td>
             </x-slot:head>
         </x-atoms.table>
@@ -56,6 +63,7 @@
                             { data: 'mobil.nopol_mobil' },
                             { data: 'no_bat' },
                             { data: 'tanggal_bat' },
+                            { data: 'status' },
                             { data: null },
                         ],
                         columnDefs: [
@@ -89,6 +97,14 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
+                                    <a href="#" onclick="blokir('`+row.id_bat+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
+                                        Blokir
+                                    </a>
+                                </div>
+                                <!--end::Menu item-->
+
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
                                     <a href="#" onclick="destroy('`+row.id_bat+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Delete
                                     </a>
@@ -99,6 +115,10 @@
                         `;
                                 },
                             },
+                            {
+                                targets: 4,
+                                render: $.fn.dataTable.render.moment('DD MMM YYYY')
+                            }
                         ],
                         // Add data-filter attribute
                         createdRow: function (row, data, dataIndex) {
@@ -139,6 +159,35 @@
             function refreshDatatables()
             {
                 $('#datatables').DataTable().ajax.reload()
+            }
+
+            function blokir(id)
+            {
+                Swal.fire({
+                    title : 'Apakah Anda yakin?',
+                    text : 'Data blokir',
+                    icon : 'warning',
+                    showCancelButton : true,
+                    confirmButton : '#3085d6',
+                    cancelButton : '#d33',
+                    confirmButtonText : 'Yes, Blokir!'
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        $.ajax({
+                            url : '{{route("bat.blokir")}}',
+                            method : 'post',
+                            data : {
+                                id : id
+                            },
+                            success : function (response){
+                                Swal.fire(
+                                    'Blokir'
+                                )
+                                refreshDatatables()
+                            }
+                        })
+                    }
+                })
             }
 
             function destroy(id)

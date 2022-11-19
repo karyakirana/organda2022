@@ -1,10 +1,5 @@
 <x-metronics>
-    @if(session()->has('message'))
-        <x-molecules.alert-danger>
-            {{session('message')}}
-        </x-molecules.alert-danger>
-    @endif
-    <x-molecules.card title="Data STID">
+    <x-molecules.card title="Data Bat">
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-5">
             <!--begin::Search-->
@@ -16,14 +11,14 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end" data-kt-docs-table-toolbar="base">
                 <!--begin::Add customer-->
-                <a href="{{route('stid.form')}}" class="btn btn-primary" title="add Mobil">
-                    Add STID
+                <a href="{{route('bat.form')}}" class="btn btn-primary" title="add BAT">
+                    Add BAT
                 </a>
                 <!--end::Add customer-->
 
                 <!--begin::Add customer-->
-                <a href="{{route('stid.index-blokir')}}" class="btn btn-primary" title="add Teluk Lamong">
-                    Data Blokir
+                <a href="{{route('bat')}}" class="btn btn-primary" title="add BAT">
+                    Data UnBlokir
                 </a>
                 <!--end::Add customer-->
             </div>
@@ -31,20 +26,18 @@
 
         </div>
         <!--end::Wrapper-->
-        <x-atoms.table id="datatables" wire:ignore.self>
+        <x-atoms.table id="datatables" wire:ignore>
             <x-slot:head>
                 <x-atoms.table.td>ID</x-atoms.table.td>
                 <x-atoms.table.td>Customer</x-atoms.table.td>
                 <x-atoms.table.td>Nopol</x-atoms.table.td>
-                <x-atoms.table.td>Kode</x-atoms.table.td>
-                <x-atoms.table.td>Masa Berlaku</x-atoms.table.td>
+                <x-atoms.table.td>Nomor BAT</x-atoms.table.td>
+                <x-atoms.table.td>Tanggal</x-atoms.table.td>
                 <x-atoms.table.td>Status</x-atoms.table.td>
                 <x-atoms.table.td></x-atoms.table.td>
             </x-slot:head>
         </x-atoms.table>
     </x-molecules.card>
-
-    <livewire:master.sopir-detail/>
 
     @push('scripts')
         <script>
@@ -62,14 +55,14 @@
                         order: [],
                         ajax: {
                             type : 'POST',
-                            url: "{{route('stid.datatables')}}",
+                            url: "{{route('bat.datatables.blokir')}}",
                         },
                         columns: [
-                            { data: 'id_stid' },
+                            { data: 'id_bat' },
                             { data: 'customer.nama_cust' },
-                            { data: 'nopol' },
-                            { data: 'kode' },
-                            { data: 'masa_berlaku' },
+                            { data: 'mobil.nopol_mobil' },
+                            { data: 'no_bat' },
+                            { data: 'tanggal_bat' },
                             { data: 'status' },
                             { data: null },
                         ],
@@ -96,7 +89,7 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="/transaksi/stid/form/`+row.id_stid+`" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
+                                    <a href="/transaksi/bat/form/`+row.id_bat+`" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
                                         Edit
                                     </a>
                                 </div>
@@ -104,15 +97,15 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="blokir('`+row.id_stid+`')" class="menu-link px-3" data-kt-docs-table-filter="blokir_row">
-                                        Blokir
+                                    <a href="#" onclick="unBlokir('`+row.id_bat+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
+                                        Delete
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="destroy('`+row.id_stid+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
+                                    <a href="#" onclick="destroy('`+row.id_bat+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Delete
                                     </a>
                                 </div>
@@ -168,6 +161,35 @@
                 $('#datatables').DataTable().ajax.reload()
             }
 
+            function unBlokir(id)
+            {
+                Swal.fire({
+                    title : 'Apakah Anda yakin?',
+                    text : 'Data Buka blokir',
+                    icon : 'warning',
+                    showCancelButton : true,
+                    confirmButton : '#3085d6',
+                    cancelButton : '#d33',
+                    confirmButtonText : 'Yes, Buka Blokir!'
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        $.ajax({
+                            url : '{{route("bat.unblokir")}}',
+                            method : 'post',
+                            data : {
+                                id : id
+                            },
+                            success : function (response){
+                                Swal.fire(
+                                    'Buka Blokir'
+                                )
+                                refreshDatatables()
+                            }
+                        })
+                    }
+                })
+            }
+
             function destroy(id)
             {
                 Swal.fire({
@@ -181,7 +203,7 @@
                 }).then((result)=>{
                     if(result.isConfirmed){
                         $.ajax({
-                            url : '{{route("stid.destroy")}}',
+                            url : '{{route("bat.destroy")}}',
                             method : 'delete',
                             data : {
                                 id : id
@@ -189,35 +211,6 @@
                             success : function (response){
                                 Swal.fire(
                                     'Deleted'
-                                )
-                                refreshDatatables()
-                            }
-                        })
-                    }
-                })
-            }
-
-            function blokir(id)
-            {
-                Swal.fire({
-                    title : 'Apakah Anda yakin?',
-                    text : 'Data diblokir',
-                    icon : 'warning',
-                    showCancelButton : true,
-                    confirmButton : '#3085d6',
-                    cancelButton : '#d33',
-                    confirmButtonText : 'Yes, Blokir!'
-                }).then((result)=>{
-                    if(result.isConfirmed){
-                        $.ajax({
-                            url : '{{route("stid.blokir")}}',
-                            method : 'post',
-                            data : {
-                                id : id
-                            },
-                            success : function (response){
-                                Swal.fire(
-                                    'Blokir'
                                 )
                                 refreshDatatables()
                             }

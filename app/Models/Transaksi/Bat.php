@@ -20,6 +20,7 @@ class Bat extends Model
         'id_cust',
         'id_mobil',
         'no_bat',
+        'status',
     ];
 
     public function customer()

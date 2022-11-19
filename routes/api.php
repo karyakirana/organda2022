@@ -35,6 +35,9 @@ Route::post('/sopir/unblokir', [\App\Http\Controllers\Master\SopirController::cl
 Route::delete('/sopir/destroy', [\App\Http\Controllers\Master\SopirController::class, 'destroy'])->name('sopir.destroy');
 
 Route::post('/bat/datatables', [\App\Http\Controllers\Transaksi\BatController::class, 'datatables'])->name('bat.datatables');
+Route::post('/bat/datatables/blokir', [\App\Http\Controllers\Transaksi\BatController::class, 'datatablesBlokir'])->name('bat.datatables.blokir');
+Route::delete('/bat/blokir', [\App\Http\Controllers\Transaksi\BatController::class, 'blokir'])->name('bat.blokir');
+Route::delete('/bat/unblokir', [\App\Http\Controllers\Transaksi\BatController::class, 'unBlokir'])->name('bat.unblokir');
 Route::delete('/bat/destroy', [\App\Http\Controllers\Transaksi\BatController::class, 'destroy'])->name('bat.destroy');
 
 Route::post('/lamong/datatables', [\App\Http\Controllers\Transaksi\LamongController::class, 'datatables'])->name('lamong.datatables');
