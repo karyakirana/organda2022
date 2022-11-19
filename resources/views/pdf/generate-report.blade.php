@@ -10,7 +10,7 @@
     <style>
         .table, th, td{
             border-color: #0b0b10!important;
-            font-size: 14pt;
+            font-size: 12pt;
             padding: 10px!important;
         }
 
@@ -26,10 +26,11 @@
             <tr class="border-1">
                 <th width="10%" class="text-center">No</th>
                 <th width="40%" class="text-center">Customer</th>
-                <th width="12.5%" class="text-center">BAT</th>
-                <th width="12.5%" class="text-center">Teluk Lamong</th>
-                <th width="12.5%" class="text-center">STID</th>
-                <th width="12.5%" class="text-center">MyPertamina</th>
+                <th width="10%" class="text-center">Sopir</th>
+                <th width="10%" class="text-center">BAT</th>
+                <th width="10%" class="text-center">Teluk Lamong</th>
+                <th width="10%" class="text-center">STID</th>
+                <th width="10%" class="text-center">MyPertamina</th>
             </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                 <tr>
                     <td class="text-center">{{$loop->iteration}}</td>
                     <td>{{$row->nama_cust}}</td>
+                    <td class="text-center">{{$row->sum_sopir}}</td>
                     <td class="text-center">{{$row->yoman}}</td>
                     <td class="text-center">{{$row->lamong}}</td>
                     <td class="text-center">{{$row->sum_stid}}</td>
@@ -46,6 +48,7 @@
             <tr>
             <tr>
                 <td colspan="2"></td>
+                <td align="center">{{$data->sum('sum_sopir')}}</td>
                 <td align="center">{{$data->sum('yoman')}}</td>
                 <td align="center">{{$data->sum('lamong')}}</td>
                 <td align="center">{{$data->sum('sum_stid')}}</td>

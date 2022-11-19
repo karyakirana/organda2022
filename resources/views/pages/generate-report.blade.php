@@ -8,6 +8,7 @@
                 <tr>
                     <x-atoms.table.td>NO</x-atoms.table.td>
                     <x-atoms.table.td>Customer</x-atoms.table.td>
+                    <x-atoms.table.td>Sopir</x-atoms.table.td>
                     <x-atoms.table.td>BAT</x-atoms.table.td>
                     <x-atoms.table.td>Lamong</x-atoms.table.td>
                     <x-atoms.table.td>STID</x-atoms.table.td>
@@ -18,6 +19,7 @@
                 <tr>
                     <x-atoms.table.td>{{$loop->iteration}}</x-atoms.table.td>
                     <x-atoms.table.td>{{$row->nama_cust}}</x-atoms.table.td>
+                    <x-atoms.table.td align="center">{{$row->sum_sopir}}</x-atoms.table.td>
                     <x-atoms.table.td align="center">{{$row->yoman}}</x-atoms.table.td>
                     <x-atoms.table.td align="center">{{$row->lamong}}</x-atoms.table.td>
                     <x-atoms.table.td align="center">{{$row->sum_stid}}</x-atoms.table.td>
@@ -27,6 +29,7 @@
             <x-slot:footer>
                 <tr>
                     <x-atoms.table.td colspan="2"></x-atoms.table.td>
+                    <x-atoms.table.td align="center">{{$customer->sum('sum_sopir')}}</x-atoms.table.td>
                     <x-atoms.table.td align="center">{{$customer->sum('yoman')}}</x-atoms.table.td>
                     <x-atoms.table.td align="center">{{$customer->sum('lamong')}}</x-atoms.table.td>
                     <x-atoms.table.td align="center">{{$customer->sum('sum_stid')}}</x-atoms.table.td>
