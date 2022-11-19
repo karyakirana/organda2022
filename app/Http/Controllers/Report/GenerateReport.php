@@ -79,7 +79,7 @@ class GenerateReport extends Controller
             ->unionAll($stid)
             ->unionAll($telukLamong);
         $union = DB::query()->fromSub($transaksiBat, 't')
-            ->selectRaw('customer.nama_cust, id, sum(bat) as yoman, sum(teluk_lamong) as lamong, sum(stid) as sum_stid, sum(mypertamina) as sum_mypertamina')
+            ->selectRaw('nama_cust, id, sum(bat) as yoman, sum(teluk_lamong) as lamong, sum(stid) as sum_stid, sum(mypertamina) as sum_mypertamina')
             ->join('customer', 'customer.id_cust', 't.id')
             ->groupBy('t.id')
             ->get();
