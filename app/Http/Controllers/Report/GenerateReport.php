@@ -42,7 +42,7 @@ class GenerateReport extends Controller
         $union = DB::query()->fromSub($transaksiBat, 't')
             ->selectRaw('nama_cust, id, sum(bat) as yoman, sum(teluk_lamong) as lamong, sum(stid) as sum_stid, sum(mypertamina) as sum_mypertamina')
             ->join('customer', 'customer.id_cust', 't.id')
-            ->groupBy('t.id', 'nama_cust')
+            ->groupBy(['t.id', 'nama_cust'])
             ->get();
         $pdf = PDF::loadView('pdf.generate-report', ['data'=>$union]);
         $pdf->setPaper('a4');
@@ -79,9 +79,9 @@ class GenerateReport extends Controller
             ->unionAll($stid)
             ->unionAll($telukLamong);
         $union = DB::query()->fromSub($transaksiBat, 't')
-            ->selectRaw('nama_cust, id, sum(bat) as yoman, sum(teluk_lamong) as lamong, sum(stid) as sum_stid, sum(mypertamina) as sum_mypertamina')
+            ->selectRaw('customer.nama_cust, id, sum(bat) as yoman, sum(teluk_lamong) as lamong, sum(stid) as sum_stid, sum(mypertamina) as sum_mypertamina')
             ->join('customer', 'customer.id_cust', 't.id')
-            ->groupBy('t.id', 'nama_cust')
+            ->groupBy('t.id', 'customer.nama_cust')
             ->get();
         $pdf = PDF::loadView('pdf.generate-report', ['data'=>$union]);
         $pdf->setPaper('a4');
