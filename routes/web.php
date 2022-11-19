@@ -50,8 +50,8 @@ Route::get('transaksi/mypertamina/blokir', [\App\Http\Controllers\Transaksi\MyPe
 Route::get('transaksi/mypertamina/form', \App\Http\Livewire\Transaksi\MyPertaminaForm::class)->name('mypertamina.form');
 Route::get('transaksi/mypertamina/form/{id_mypertamina}', [\App\Http\Livewire\Transaksi\MyPertaminaForm::class]);
 
-Route::get('report/generate', [\App\Http\Controllers\Report\GenerateReport::class, 'index']);
-Route::get('report/print', [\App\Http\Controllers\Report\GenerateReport::class, 'toPdf']);
+Route::get('report/generate', [\App\Http\Controllers\Report\GenerateReport::class, 'index'])->name('report.generate');
+Route::get('report/print', [\App\Http\Controllers\Report\GenerateReport::class, 'toPdf'])->name('report.print');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
