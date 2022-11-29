@@ -16,7 +16,7 @@ class TelukLamongByCustomer extends Component
 
     public function detailTelukLamong($id_cust)
     {
-        $this->detailTelukLamong = Lamong::where('id_cust', $id_cust)
+        $this->detailTelukLamong = Lamong::whereRelation('sopir', 'id_cust', $id_cust)
             ->latest('id_translamong')->get();
         $this->emit('detailLamongModalShow');
     }

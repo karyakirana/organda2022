@@ -2,6 +2,8 @@
 
 namespace App\Models\Master;
 
+use App\Models\Transaksi\Lamong;
+use App\Models\Transaksi\TransaksiTPS;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,5 +29,15 @@ class Sopir extends Model
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'id_cust', 'id_cust');
+    }
+
+    public function transaksiTps()
+    {
+        return $this->hasOne(TransaksiTPS::class, 'id_sopir', 'id_sopir');
+    }
+
+    public function transaksiLamong()
+    {
+        return $this->hasOne(Lamong::class, 'id_sopir', 'id_sopir');
     }
 }

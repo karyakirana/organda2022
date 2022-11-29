@@ -36,6 +36,11 @@ Route::get('transaksi/bat/blokir', [\App\Http\Controllers\Transaksi\BatControlle
 Route::get('transaksi/bat/form', \App\Http\Livewire\Transaksi\BatForm::class)->name('bat.form');
 Route::get('transaksi/bat/form/{id_bat}', \App\Http\Livewire\Transaksi\BatForm::class);
 
+Route::get('transaksi/tps', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'index'])->name('tps');
+Route::get('transaksi/tps/blokir', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'indexBlokir'])->name('tps.index.blokir');
+Route::get('transaksi/tps/form', \App\Http\Livewire\Transaksi\SopirTpsForm::class)->name('tps.form');
+Route::get('transaksi/tps/form/{id_transaksitps}', \App\Http\Livewire\Transaksi\SopirTpsForm::class);
+
 Route::get('transaksi/lamong', [\App\Http\Controllers\Transaksi\LamongController::class, 'index'])->name('lamong');
 Route::get('transaksi/lamong/blokir', [\App\Http\Controllers\Transaksi\LamongController::class, 'indexBlokir'])->name('lamong.index-blokir');
 Route::get('transaksi/lamong/form', \App\Http\Livewire\Transaksi\LamongForm::class)->name('lamong.form');
@@ -53,6 +58,8 @@ Route::get('transaksi/mypertamina/form/{id_mypertamina}', [\App\Http\Livewire\Tr
 
 Route::get('report/generate', [\App\Http\Controllers\Report\GenerateReport::class, 'index'])->name('report.generate');
 Route::get('report/print', [\App\Http\Controllers\Report\GenerateReport::class, 'toPdf'])->name('report.print');
+
+Route::get('report/sopir', [\App\Http\Controllers\Report\SopirReportController::class, 'index'])->name('report.sopir');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

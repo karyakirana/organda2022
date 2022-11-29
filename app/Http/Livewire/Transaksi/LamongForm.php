@@ -28,8 +28,6 @@ class LamongForm extends Component
             $this->update = true;
             $lamong = Lamong::find($id_lamong);
             $this->id_translamong = $lamong->id_translamong;
-            $this->id_cust = $lamong->id_cust;
-            $this->nama_cust = $lamong->customer->nama_cust;
             $this->id_sopir = $lamong->id_sopir;
             $this->nama_sopir = $lamong->sopir->nama_sopir;
             $this->nik_lamong = $lamong->nik_lamong;
@@ -65,7 +63,6 @@ class LamongForm extends Component
     {
         $telukLamong = new Lamong;
         $telukLamong->id_translamong = $this->kode();
-        $telukLamong->id_cust = $this->id_cust;
         $telukLamong->id_sopir = $this->id_sopir;
         $telukLamong->nik_lamong = $this->nik_lamong;
         $telukLamong->status = $this->status;
@@ -78,7 +75,6 @@ class LamongForm extends Component
     public function update()
     {
         $telukLamong = Lamong::find($this->id_translamong);
-        $telukLamong->id_cust = $this->id_cust;
         $telukLamong->id_sopir = $this->id_sopir;
         $telukLamong->nik_lamong = $this->nik_lamong;
         $telukLamong->save();

@@ -36,9 +36,15 @@ Route::delete('/sopir/destroy', [\App\Http\Controllers\Master\SopirController::c
 
 Route::post('/bat/datatables', [\App\Http\Controllers\Transaksi\BatController::class, 'datatables'])->name('bat.datatables');
 Route::post('/bat/datatables/blokir', [\App\Http\Controllers\Transaksi\BatController::class, 'datatablesBlokir'])->name('bat.datatables.blokir');
-Route::delete('/bat/blokir', [\App\Http\Controllers\Transaksi\BatController::class, 'blokir'])->name('bat.blokir');
-Route::delete('/bat/unblokir', [\App\Http\Controllers\Transaksi\BatController::class, 'unBlokir'])->name('bat.unblokir');
+Route::post('/bat/blokir', [\App\Http\Controllers\Transaksi\BatController::class, 'blokir'])->name('bat.blokir');
+Route::post('/bat/unblokir', [\App\Http\Controllers\Transaksi\BatController::class, 'unBlokir'])->name('bat.unblokir');
 Route::delete('/bat/destroy', [\App\Http\Controllers\Transaksi\BatController::class, 'destroy'])->name('bat.destroy');
+
+Route::post('/tps/datatables', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'datatables'])->name('tps.datatables');
+Route::post('/tps/datatables/blokir', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'datatablesBlokir'])->name('tps.datatables.blokir');
+Route::post('/tps/blokir', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'blokir'])->name('tps.blokir');
+Route::post('/tps/unblokir', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'unblokir'])->name('tps.unblokir');
+Route::delete('/tps/destroy', [\App\Http\Controllers\Transaksi\SopirTPSController::class, 'destroy'])->name('tps.destroy');
 
 Route::post('/lamong/datatables', [\App\Http\Controllers\Transaksi\LamongController::class, 'datatables'])->name('lamong.datatables');
 Route::post('/lamong/datatables/blokir', [\App\Http\Controllers\Transaksi\LamongController::class, 'datatablesBlokir'])->name('lamong.datatables.blokir');
@@ -57,3 +63,5 @@ Route::post('/mypertamina/datatables/blokir', [\App\Http\Controllers\Transaksi\M
 Route::post('/mypertamina/blokir', [\App\Http\Controllers\Transaksi\MyPertaminaController::class, 'blokir'])->name('mypertamina.blokir');
 Route::post('/mypertamina/unblokir', [\App\Http\Controllers\Transaksi\MyPertaminaController::class, 'unBlokir'])->name('mypertamina.unblokir');
 Route::delete('/mypertamina/destroy', [\App\Http\Controllers\Transaksi\MyPertaminaController::class, 'destroy'])->name('mypertamina.destroy');
+
+Route::post('/report/sopir/datatables', [\App\Http\Controllers\Report\SopirReportController::class, 'sopirDatatables'])->name('report.sopir.datatables');

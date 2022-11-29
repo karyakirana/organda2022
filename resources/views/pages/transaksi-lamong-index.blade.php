@@ -36,8 +36,7 @@
                 <x-atoms.table.td>ID</x-atoms.table.td>
                 <x-atoms.table.td>Customer</x-atoms.table.td>
                 <x-atoms.table.td>Sopir</x-atoms.table.td>
-                <x-atoms.table.td>NIK</x-atoms.table.td>
-                <x-atoms.table.td>Status</x-atoms.table.td>
+                <x-atoms.table.td>NIK Lamong</x-atoms.table.td>
                 <x-atoms.table.td></x-atoms.table.td>
             </x-slot:head>
         </x-atoms.table>
@@ -63,10 +62,9 @@
                         },
                         columns: [
                             { data: 'id_translamong' },
-                            { data: 'customer.nama_cust' },
+                            { data: 'sopir.customer.nama_cust' },
                             { data: 'sopir.nama_sopir' },
                             { data: 'nik_lamong' },
-                            { data: 'status' },
                             { data: null },
                         ],
                         columnDefs: [

@@ -22,7 +22,7 @@ class LamongController extends Controller
     public function datatables(Request $request)
     {
         if ($request->ajax()){
-            $data = Lamong::with(['customer', 'sopir'])
+            $data = Lamong::with(['sopir.customer', 'sopir'])
                 ->whereNot('status', 'Blokir')
                 ->latest('id_translamong')->get();
             return DataTables::of($data)
@@ -34,7 +34,7 @@ class LamongController extends Controller
     public function datatablesBlokir(Request $request)
     {
         if ($request->ajax()){
-            $data = Lamong::with(['customer', 'sopir'])
+            $data = Lamong::with(['sopir', 'sopir.customer'])
                 ->where('status', 'Blokir')
                 ->latest('id_translamong')->get();
             return DataTables::of($data)

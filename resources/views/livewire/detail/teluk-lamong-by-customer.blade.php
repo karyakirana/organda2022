@@ -14,7 +14,7 @@
                 @foreach($detailTelukLamong as $row)
                     <tr>
                         <x-atoms.table.td>{{$row->id_translamong}}</x-atoms.table.td>
-                        <x-atoms.table.td>{{$row->customer->nama_cust}}</x-atoms.table.td>
+                        <x-atoms.table.td>{{$row->sopir->customer->nama_cust}}</x-atoms.table.td>
                         <x-atoms.table.td>{{$row->sopir->nama_sopir}}</x-atoms.table.td>
                         <x-atoms.table.td>{{$row->nik_lamong}}</x-atoms.table.td>
                         <x-atoms.table.td>{{$row->status}}</x-atoms.table.td>

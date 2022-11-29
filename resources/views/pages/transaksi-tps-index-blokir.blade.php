@@ -1,5 +1,10 @@
 <x-metronics>
-    <x-molecules.card title="Data Customer">
+    @if(session()->has('message'))
+        <x-molecules.alert-danger>
+            {{session('message')}}
+        </x-molecules.alert-danger>
+    @endif
+    <x-molecules.card title="Data Sopir">
         <!--begin::Wrapper-->
         <div class="d-flex flex-stack mb-5">
             <!--begin::Search-->
@@ -10,15 +15,10 @@
 
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end" data-kt-docs-table-toolbar="base">
-                <!--begin::Add customer-->
-                <button type="button" class="btn btn-primary" wire:click="" data-bs-toggle="modal" data-bs-target="#modalCustomer" title="add Customer">
-                    Add Customer
-                </button>
-                <!--end::Add customer-->
 
                 <!--begin::Add customer-->
-                <a href="{{route('customer.blokir')}}" class="btn btn-primary" title="add BAT">
-                    Data Blokir
+                <a href="{{route('tps')}}" class="btn btn-primary">
+                    Data UnBlokir
                 </a>
                 <!--end::Add customer-->
             </div>
@@ -29,26 +29,14 @@
         <x-atoms.table id="datatables" wire:ignore.self>
             <x-slot:head>
                 <x-atoms.table.td>ID</x-atoms.table.td>
-                <x-atoms.table.td>Nama</x-atoms.table.td>
-                <x-atoms.table.td>Telepon</x-atoms.table.td>
-                <x-atoms.table.td>Alamat</x-atoms.table.td>
-                <x-atoms.table.td>Status</x-atoms.table.td>
+                <x-atoms.table.td>Customer</x-atoms.table.td>
+                <x-atoms.table.td>Sopir</x-atoms.table.td>
+                <x-atoms.table.td>KTP</x-atoms.table.td>
+                <x-atoms.table.td>NIK</x-atoms.table.td>
                 <x-atoms.table.td></x-atoms.table.td>
             </x-slot:head>
         </x-atoms.table>
     </x-molecules.card>
-
-    <livewire:master.customer-c-r-u-d />
-
-    <livewire:detail.bat-by-customer />
-
-    <livewire:detail.teluk-lamong-by-customer />
-
-    <livewire:detail.tps-by-customer />
-
-    <livewire:detail.stid-by-customer />
-
-    <livewire:detail.my-pertamina-by-customer />
 
     @push('scripts')
         <script>
@@ -66,14 +54,14 @@
                         order: [],
                         ajax: {
                             type : 'POST',
-                            url: "{{route('customer.datatables')}}",
+                            url: "{{route('tps.datatables.blokir')}}",
                         },
                         columns: [
-                            { data: 'id_cust' },
-                            { data: 'nama_cust' },
-                            { data: 'telp_cust' },
-                            { data: 'alamat_cust' },
-                            { data: 'status' },
+                            { data: 'id_transaksitps' },
+                            { data: 'sopir.customer.nama_cust' },
+                            { data: 'sopir.nama_sopir' },
+                            { data: 'sopir.ktp_sopir' },
+                            { data: 'nik_tps' },
                             { data: null },
                         ],
                         columnDefs: [
@@ -99,7 +87,7 @@
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true">
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="edit('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
+                                    <a href="/transaksi/tps/form/`+row.id_transaksitps+`" class="menu-link px-3" data-kt-docs-table-filter="edit_row">
                                         Edit
                                     </a>
                                 </div>
@@ -107,55 +95,15 @@
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="detailBat('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="detailBat_row">
-                                        Detail Bat
+                                    <a href="#" onclick="unBlokir('`+row.id_transaksitps+`')" class="menu-link px-3" data-kt-docs-table-filter="blokir_row">
+                                        UnBlokir
                                     </a>
                                 </div>
                                 <!--end::Menu item-->
 
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="#" onclick="detailTelukLamong('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="detailBat_row">
-                                        Teluk Lamong
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="detailTps('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="detailBat_row">
-                                        TPS
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="detailStid('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="detailBat_row">
-                                        STID
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="detailMyPertamina('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="detailBat_row">
-                                        MyPertamina
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="updateBlokir('`+row.id_cust+`', 'Blokir')" class="menu-link px-3" data-kt-docs-table-filter="blokir_row">
-                                        Blokir
-                                    </a>
-                                </div>
-                                <!--end::Menu item-->
-
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" onclick="destroy('`+row.id_cust+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
+                                    <a href="#" onclick="destroy('`+row.id_transaksitps+`')" class="menu-link px-3" data-kt-docs-table-filter="delete_row">
                                         Delete
                                     </a>
                                 </div>
@@ -207,59 +155,62 @@
                 $('#datatables').DataTable().ajax.reload()
             }
 
-            Livewire.on('refreshDatatables', function () {
-                refreshDatatables()
-            })
-
-            function updateBlokir(id, status)
-            {
-                Livewire.emit('updateBlokir', id, status)
-            }
-
-            function edit(id)
-            {
-                Livewire.emit('edit', id)
-            }
-
-            function store()
-            {
-                Livewire.emit('store')
-            }
-
-            function update()
-            {
-                Livewire.emit('update')
-            }
-
             function destroy(id)
             {
-                Livewire.emit('confirmDestroy', id)
-                modalConfirm.show()
+                Swal.fire({
+                    title : 'Apakah Anda yakin?',
+                    text : 'Data yang dihapus tidak dapat dikembalikan',
+                    icon : 'warning',
+                    showCancelButton : true,
+                    confirmButton : '#3085d6',
+                    cancelButton : '#d33',
+                    confirmButtonText : 'Yes, delete!'
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        $.ajax({
+                            url : '{{route("tps.destroy")}}',
+                            method : 'delete',
+                            data : {
+                                id : id
+                            },
+                            success : function (response){
+                                Swal.fire(
+                                    'Deleted'
+                                )
+                                refreshDatatables()
+                            }
+                        })
+                    }
+                })
             }
 
-            function detailBat(id)
+            function unBlokir(id)
             {
-                window.livewire.emit('detailBat', id)
-            }
-
-            function detailTelukLamong(id)
-            {
-                window.livewire.emit('detailTelukLamong', id)
-            }
-
-            function detailTps(id)
-            {
-                window.livewire.emit('detailTps', id)
-            }
-
-            function detailStid(id)
-            {
-                window.livewire.emit('detailStid', id)
-            }
-
-            function detailMyPertamina(id)
-            {
-                window.livewire.emit('detailMyPertamina', id)
+                Swal.fire({
+                    title : 'Apakah Anda yakin?',
+                    text : 'Data Buka diblokir',
+                    icon : 'warning',
+                    showCancelButton : true,
+                    confirmButton : '#3085d6',
+                    cancelButton : '#d33',
+                    confirmButtonText : 'Yes, Buka Blokir!'
+                }).then((result)=>{
+                    if(result.isConfirmed){
+                        $.ajax({
+                            url : '{{route("tps.unblokir")}}',
+                            method : 'post',
+                            data : {
+                                id : id
+                            },
+                            success : function (response){
+                                Swal.fire(
+                                    'UnBlokir'
+                                )
+                                refreshDatatables()
+                            }
+                        })
+                    }
+                })
             }
         </script>
     @endpush
