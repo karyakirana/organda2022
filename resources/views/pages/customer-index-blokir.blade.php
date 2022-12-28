@@ -28,6 +28,8 @@
         </x-atoms.table>
     </x-molecules.card>
 
+    <livewire:master.customer-c-r-u-d />
+
     @push('scripts')
         <script>
             var KTDatatablesServerSide = function () {
@@ -105,10 +107,19 @@
                 KTDatatablesServerSide.init();
             });
 
+            function updateBlokir(id, status)
+            {
+                Livewire.emit('updateBlokir', id, status)
+            }
+
             function refreshDatatables()
             {
                 $('#datatables').DataTable().ajax.reload()
             }
+
+            Livewire.on('refreshDatatables', function () {
+                refreshDatatables()
+            })
         </script>
     @endpush
 </x-metronics>
