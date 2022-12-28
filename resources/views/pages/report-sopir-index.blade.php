@@ -16,11 +16,7 @@
             <!--begin::Toolbar-->
             <div class="d-flex align-items-center gap-2 gap-lg-3 justify-content-end" data-kt-docs-table-toolbar="base">
 
-                <!--begin::Add customer-->
-                <a href="{{route('mobil.blokir')}}" class="btn btn-primary" title="add Mobil">
-                    Data Blokir
-                </a>
-                <!--end::Add customer-->
+            
             </div>
             <!--end::Toolbar-->
 
