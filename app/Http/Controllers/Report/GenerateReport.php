@@ -32,7 +32,8 @@ class GenerateReport extends Controller
             ->groupBy('customer.id_cust');
         $telukLamong = DB::table('transaksi_lamong')
             ->selectRaw('nama_cust, null as sopir, customer.id_cust as id, null as bat, count(customer.id_cust) as teluk_lamong, null as stid, null as mypertamina')
-            ->join('customer', 'customer.id_cust', 'transaksi_lamong.id_cust')
+            ->join('sopir', 'sopir.id_sopir', 'transaksi_lamong.id_sopir')
+            ->join('customer', 'customer.id_cust', 'sopir.id_cust')
             ->whereNot('customer.status', 'Blokir')
             ->whereNot('transaksi_lamong.status', 'Blokir')
             ->groupBy('customer.id_cust');
